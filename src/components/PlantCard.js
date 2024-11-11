@@ -1,18 +1,48 @@
-import React from "react";
+import React, { useState } from 'react';
 
-function PlantCard() {
+function PlantCard({ plant, onDeletePlant, setPlants }) {
+  const [isSoldOut, setIsSoldOut] = useState(plant.soldOut || false);
+  const [price, setPrice] = useState(plant.price);
+
+  const handleSoldOutToggle = () => setIsSoldOut(!isSoldOut);
+
+  const handlePriceChange = (e) => {
+    const newPrice = parseFloat(e.target.value);
+    setPrice(newPrice);
+
+    fetch(`http://localhost:6001/plants/${plant.id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ price: newPrice }),
+    })
+      .then((response) => response.json())
+      .then((updatedPlant) => {
+        setPlants((plants) =>
+          plants.map((p) => (p.id === plant.id ? updatedPlant : p))
+        );
+      });
+  };
+
   return (
-    <li className="card" data-testid="plant-item">
-      <img src={"https://via.placeholder.com/400"} alt={"plant name"} />
-      <h4>{"plant name"}</h4>
-      <p>Price: {"plant price"}</p>
-      {true ? (
-        <button className="primary">In Stock</button>
-      ) : (
-        <button>Out of Stock</button>
-      )}
+    <li>
+      <img src={plant.image} alt={plant.name} width="100" />
+      <h2>{plant.name}</h2>
+      <p>
+        Price: $
+        <input
+          type="number"
+          value={price}
+          onChange={handlePriceChange}
+          step="0.01"
+        />
+      </p>
+      <button onClick={handleSoldOutToggle}>
+        {isSoldOut ? 'Sold Out' : 'Available'}
+      </button>
+      <button onClick={() => onDeletePlant(plant.id)}>Delete</button>
     </li>
   );
 }
 
 export default PlantCard;
+

@@ -1,15 +1,13 @@
-import React from "react";
-import NewPlantForm from "./NewPlantForm";
-import PlantList from "./PlantList";
-import Search from "./Search";
+import React from 'react';
 
-function PlantPage() {
+function PlantPage({ plant }) {
   return (
-    <main>
-      <NewPlantForm />
-      <Search />
-      <PlantList />
-    </main>
+    <div>
+      <h1>{plant.name}</h1>
+      <img src={plant.image} alt={plant.name} width="200" />
+      <p>Price: ${plant.price}</p>
+      <p>{plant.soldOut ? 'Sold Out' : 'Available'}</p>
+    </div>
   );
 }
 

@@ -1,10 +1,27 @@
-import React from "react";
-import PlantCard from "./PlantCard";
+import React from 'react';
+import PlantCard from './PlantCard';
 
-function PlantList() {
+function PlantList({ plants, searchTerm, setPlants }) {
+  const filteredPlants = plants.filter((plant) =>
+    plant.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const handleDeletePlant = (id) => {
+    fetch(`http://localhost:6001/plants/${id}`, {
+      method: 'DELETE',
+    })
+      .then(() => setPlants(plants.filter((plant) => plant.id !== id)))
+      .catch((error) => console.error('Error deleting plant:', error));
+  };
+
   return (
-    <ul className="cards">{/* render PlantCards components in here */}</ul>
+    <ul>
+      {filteredPlants.map((plant) => (
+        <PlantCard key={plant.id} plant={plant} onDeletePlant={handleDeletePlant} setPlants={setPlants} />
+      ))}
+    </ul>
   );
 }
 
 export default PlantList;
+
