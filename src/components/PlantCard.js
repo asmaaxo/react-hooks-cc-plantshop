@@ -10,7 +10,7 @@ function PlantCard({ plant, onDeletePlant, setPlants }) {
     const newPrice = parseFloat(e.target.value);
     setPrice(newPrice);
 
-    fetch(`https://react-hooks-cc-plantshop-24xk.onrender.com`, {
+    fetch(`https://react-hooks-cc-plantshop-24xk.onrender.com/plants/${plant.id}`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ price: newPrice }),

@@ -9,14 +9,14 @@ function App() {
   const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
-    fetch('https://react-hooks-cc-plantshop-24xk.onrender.com')
+    fetch('https://react-hooks-cc-plantshop-24xk.onrender.com/plants')
       .then((response) => response.json())
       .then((data) => setPlants(data))
       .catch((error) => console.error('Error fetching plants:', error));
   }, []);
 
   const handleAddPlant = (newPlant) => {
-    fetch('https://react-hooks-cc-plantshop-24xk.onrender.com', {
+    fetch('https://react-hooks-cc-plantshop-24xk.onrender.com/plants', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(newPlant),

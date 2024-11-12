@@ -7,7 +7,7 @@ function PlantList({ plants, searchTerm, setPlants }) {
   );
 
   const handleDeletePlant = (id) => {
-    fetch(`https://react-hooks-cc-plantshop-24xk.onrender.com`, {
+    fetch(`https://react-hooks-cc-plantshop-24xk.onrender.com/plants/${id}`, {
       method: 'DELETE',
     })
       .then(() => setPlants(plants.filter((plant) => plant.id !== id)))
@@ -23,5 +23,5 @@ function PlantList({ plants, searchTerm, setPlants }) {
   );
 }
 
-export default PlantList;
+export default PlantList; 
 
