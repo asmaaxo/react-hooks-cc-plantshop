@@ -7,7 +7,7 @@ function PlantList({ plants, searchTerm, setPlants }) {
   );
 
   const handleDeletePlant = (id) => {
-    fetch(`http://localhost:6001/plants/${id}`, {
+    fetch(`https://react-hooks-cc-plantshop-24xk.onrender.com`, {
       method: 'DELETE',
     })
       .then(() => setPlants(plants.filter((plant) => plant.id !== id)))
