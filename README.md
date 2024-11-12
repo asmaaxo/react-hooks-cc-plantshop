@@ -19,7 +19,7 @@ Mark plants as "sold out"
 Filter plants by name
 This app includes a backend server and a frontend interface built with React.
 ##Live link ## 
-This is the deployed link: [live link](https://rad-speculoos-4d7e2e.netlify.app)
+This is the deployed link: [live link](https://bejewelled-buttercream-da9dc1.netlify.app)
 
 
 
